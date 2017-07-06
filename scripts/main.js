@@ -116,7 +116,7 @@ Player.prototype = {
                         item = null;
                         self.bullets.splice(i,1);
                         //2、目标扣血
-                        
+
                     }
                     if(item && item.isOut()){
                         item.$el.remove();
