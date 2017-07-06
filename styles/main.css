@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+html, body {
+  height: 100%; }
+
+.height100, .bg {
+  height: 100%; }
+
+.borderRadius, .player {
+  border-radius: 50%; }
+
+.bg {
+  position: relative;
+  background: url("../images/bg.jpg") no-repeat center;
+  background-size: 100% 100%; }
+
+.ground {
+  position: fixed;
+  width: 100%;
+  height: 150px;
+  bottom: 0;
+  left: 0;
+  background: darkslategray; }
+
+.player {
+  position: fixed;
+  width: 50px;
+  height: 50px; }
+
+.player-1 {
+  bottom: 150px;
+  left: 150px; }
+
+.player-2 {
+  bottom: 150px;
+  right: 150px; }
+
+.jump {
+  animation: 1s jump;
+  animation-timing-function: linear; }
+
+@keyframes jump {
+  0% {
+    bottom: 150px; }
+  50% {
+    bottom: 300px;
+    transform: rotate(540deg); }
+  100% {
+    bottom: 150px;
+    transform: rotate(1080deg); } }
+.bullet {
+  display: inline-block;
+  position: fixed;
+  width: 42px;
+  height: 10px; }
+
+.player-1-bullet-right {
+  background: url("../images/player1-bullet-right.png"); }
+
+.player-1-bullet-left {
+  background: url("../images/player1-bullet-left.png"); }
+
+.player-2-bullet-right {
+  background: url("../images/player2-bullet-right.png"); }
+
+.player-2-bullet-left {
+  background: url("../images/player2-bullet-left.png"); }
+
+/*# sourceMappingURL=main.css.map */
