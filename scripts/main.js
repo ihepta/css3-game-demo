@@ -13,7 +13,7 @@ var GameConfig = {
     player2:{
         jumpMoveOffset : 150,
         maxBulletsNum : 3,
-        bulletPower : 12,
+        bulletPower : 10,
         bloodNum : 100,
         bulletClock : null
     }
@@ -140,15 +140,13 @@ Player.prototype = {
     },
     /**扣血**/
     dropBlood : function(power){
-        var signal = this.name == 'player1' ? '-' : '+';//定义向左移动还是向右移动
         this.remainBloodNum = this.remainBloodNum - power > 0 ? this.remainBloodNum - power : 0;
         //血量值减少
         this.$bloodBarEl.parent().siblings('.blood-num').text(this.remainBloodNum);
         //血量条移动
         var bloodBarElWidth = this.$bloodBarEl.width();
-        debugger;
-        var leftOffset = Math.ceil(power/this.bloodNum*bloodBarElWidth);
-        this.$bloodBarEl.css({left:signal+'='+leftOffset});
+        var offset = (this.bloodNum-this.remainBloodNum)/this.bloodNum*bloodBarElWidth;
+        this.$bloodBarEl.css(this.name == 'player1' ? {left:'-'+offset+'px'} : {right:'-'+offset+'px'});
         if(this.remainBloodNum == 0){
             //游戏结束
             gameEngine.gameOver();

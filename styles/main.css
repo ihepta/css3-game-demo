@@ -41,7 +41,7 @@ html, body {
         width: 99%;
         top: 5px;
         background-color: springgreen;
-        transition: left 1s; }
+        transition: left 1s,right 1s; }
   .bg .player1-blood-area {
     float: left;
     border-left: none; }
@@ -98,15 +98,6 @@ html, body {
   animation: 1s jump;
   animation-timing-function: linear; }
 
-@keyframes jump {
-  0% {
-    bottom: 150px; }
-  50% {
-    bottom: 300px;
-    transform: rotate(540deg); }
-  100% {
-    bottom: 150px;
-    transform: rotate(1080deg); } }
 .bullet {
   display: inline-block;
   position: fixed;
@@ -124,5 +115,15 @@ html, body {
 
 .player-2-bullet-left {
   background: url("../images/player2-bullet-left.png"); }
+
+@keyframes jump {
+  0% {
+    bottom: 150px; }
+  50% {
+    bottom: 300px;
+    transform: rotate(540deg); }
+  100% {
+    bottom: 150px;
+    transform: rotate(1080deg); } }
 
 /*# sourceMappingURL=main.css.map */

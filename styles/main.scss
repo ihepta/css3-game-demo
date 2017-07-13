@@ -36,7 +36,7 @@ $duringTime:1s;
         width: 99%;
         top:5px;
         background-color: springgreen;
-        transition: left 1s;
+        transition: left 1s,right 1s;
       }
     }
   }
@@ -112,17 +112,6 @@ $duringTime:1s;
   animation: $duringTime jump;
   animation-timing-function: linear;
 }
-@keyframes jump {
-  0% {bottom:$groundHeight;}
-  50% {
-    bottom:$groundHeight+150px;
-    transform: rotate(540deg);
-  }
-  100% {
-    bottom:$groundHeight;
-    transform: rotate(1080deg);
-  }
-}
 .bullet{
   display: inline-block;
   position: fixed;
@@ -140,5 +129,19 @@ $duringTime:1s;
 }
 .player-2-bullet-left{
   background: url("../images/player2-bullet-left.png");
+}
+@keyframes jump {
+  0% {bottom:$groundHeight;}
+  50% {
+    bottom:$groundHeight+150px;
+    transform: rotate(540deg);
+  }
+  100% {
+    bottom:$groundHeight;
+    transform: rotate(1080deg);
+  }
+}
+@keyframes blink {
+  
 }
 
