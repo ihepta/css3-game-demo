@@ -7,7 +7,62 @@
 </head>
 <body>
     <div class="bg">
-        <div class="ground"></div>
+        <div class="blood-area player1-blood-area">
+            <span class="blood-num"></span>
+            <div class="blood-bar-div">
+                <span class="blood-bar"></span>
+            </div>
+        </div>
+        <div class="blood-area player2-blood-area">
+            <span class="blood-num"></span>
+            <div class="blood-bar-div">
+                <span class="blood-bar"></span>
+            </div>
+        </div>
+        <div class="ground">
+            <div class="control-manual player1-control-manual">
+                <table cellspacing="0" border="0">
+                    <tr>
+                        <td rowspan="2">move：</td>
+                        <td colspan="3"><img src="../images/key-W.png" width="50px" height="50px"></td>
+                        <td class="padding-left">jump&move：</td>
+                        <td><img src="../images/key-W.png" width="50px" height="50px"></td>
+                        <td>+</td>
+                        <td><img src="../images/key-A.png" width="50px" height="50px"></td>
+                        <td>or</td>
+                        <td><img src="../images/key-D.png" width="50px" height="50px"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/key-A.png" width="50px" height="50px"></td>
+                        <td><img src="../images/key-S.png" width="50px" height="50px"></td>
+                        <td><img src="../images/key-D.png" width="50px" height="50px"></td>
+                        <td>shoot：</td>
+                        <td colspan="5"><img src="../images/key-space.png" width="150px" height="50px"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="control-manual player2-control-manual">
+                <table cellspacing="0" border="0">
+                    <tr>
+                        <td rowspan="2">move：</td>
+                        <td colspan="3"><img src="../images/key-up-arrow.png" width="50px" height="50px"></td>
+                        <td class="padding-left">jump&move：</td>
+                        <td><img src="../images/key-up-arrow.png" width="50px" height="50px"></td>
+                        <td>+</td>
+                        <td><img src="../images/key-left-arrow.png" width="50px" height="50px"></td>
+                        <td>or</td>
+                        <td><img src="../images/key-right-arrow.png" width="50px" height="50px"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../images/key-left-arrow.png" width="50px" height="50px"></td>
+                        <td><img src="../images/key-down-arrow.png" width="50px" height="50px"></td>
+                        <td><img src="../images/key-right-arrow.png" width="50px" height="50px"></td>
+                        <td>shoot：</td>
+                        <td colspan="5"><img src="../images/key-ctrl.png" width="50px" height="50px"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
         <img src="../images/p1.png" class="player player-1" id="player1"/>
         <img src="../images/p2.png" class="player player-2" id="player2"/>
     </div>

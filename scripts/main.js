@@ -4,13 +4,17 @@
  */
 var GameConfig = {
     player1:{
-        jumpMoveOffset : 50,//跳起之后左右移动的横向偏移距离
+        jumpMoveOffset : 150,//跳起之后左右移动的横向偏移距离
         maxBulletsNum : 3,//屏幕最大允许子弹数量
+        bulletPower : 10,//子弹伤害值
+        bloodNum : 100,//血量
         bulletClock : null//子弹飞行clock
     },
     player2:{
-        jumpMoveOffset : 100,
+        jumpMoveOffset : 150,
         maxBulletsNum : 3,
+        bulletPower : 12,
+        bloodNum : 100,
         bulletClock : null
     }
 };
@@ -22,13 +26,17 @@ var GameConfig = {
  * @constructor
  */
 var Player = function(name,el,enemyEl){
-    el.addEventListener('animationend',mainFun.animationEndCallBack);
+    el.addEventListener('animationend',gameEngine.animationEndCallBack);
     this.name = name;
     this.el = el;
     this.$el = $(this.el);
     this.$enemyEl = $(enemyEl);
+    this.$bloodBarEl = $('.'+name+'-blood-area .blood-bar');
     this.jumpMoveOffset = this.name == 'player1' ? GameConfig.player1.jumpMoveOffset : GameConfig.player2.jumpMoveOffset;
     this.maxBulletsNum = this.name == 'player1' ? GameConfig.player1.maxBulletsNum : GameConfig.player2.maxBulletsNum;
+    this.bulletPower = this.name == 'player1' ? GameConfig.player1.bulletPower : GameConfig.player2.bulletPower;
+    this.bloodNum = this.name == 'player1' ? GameConfig.player1.bloodNum : GameConfig.player2.bloodNum;
+    this.remainBloodNum = this.bloodNum;
     this.bullets = [];
 };
 Player.prototype = {
@@ -43,6 +51,8 @@ Player.prototype = {
             this.$el.removeClass('jump');
             var currentBottom = this.$el.css('bottom');
             this.$el.css({bottom:currentBottom});
+            var currentLeft = this.$el.css('left');
+            this.$el.css({left:currentLeft});
         }
     },
     /**左移**/
@@ -111,20 +121,37 @@ Player.prototype = {
                     item.flyOneStep();
                     if(item && item.hitTarget()){
                         //准确打击目标
-                        //1、子弹爆炸
+                        //1、目标扣血
+                        gameEngine.playerList[item.player.$enemyEl.attr('id')].dropBlood(item.player.bulletPower);
+                        //2、子弹爆炸
                         item.$el.remove();
                         item = null;
                         self.bullets.splice(i,1);
-                        //2、目标扣血
-
                     }
                     if(item && item.isOut()){
+                        //飞出屏幕边界
                         item.$el.remove();
                         item = null;
                         self.bullets.splice(i,1);
                     }
                 }
-            },200);
+            },60);
+        }
+    },
+    /**扣血**/
+    dropBlood : function(power){
+        var signal = this.name == 'player1' ? '-' : '+';//定义向左移动还是向右移动
+        this.remainBloodNum = this.remainBloodNum - power > 0 ? this.remainBloodNum - power : 0;
+        //血量值减少
+        this.$bloodBarEl.parent().siblings('.blood-num').text(this.remainBloodNum);
+        //血量条移动
+        var bloodBarElWidth = this.$bloodBarEl.width();
+        debugger;
+        var leftOffset = Math.ceil(power/this.bloodNum*bloodBarElWidth);
+        this.$bloodBarEl.css({left:signal+'='+leftOffset});
+        if(this.remainBloodNum == 0){
+            //游戏结束
+            gameEngine.gameOver();
         }
     }
 };
@@ -197,20 +224,26 @@ Bullet.prototype = {
  * 主方法
  * @type {{init, onKeyDown, animationEndCallBack, crash}}
  */
-var mainFun = function(){
+var gameEngine = function(){
 
-    var player1,player2;
+    var player1,player2 = null;
+    var playerList = {};
 
     var init = function(){
         //初始化角色
         initPlayers();
         //keydown事件
-        $('body').on('keydown',mainFun.onKeyDown);
+        $('body').on('keydown',gameEngine.onKeyDown);
     };
 
     var initPlayers = function(){
         player1 = new Player('player1',document.getElementById('player1'),document.getElementById('player2'));
         player2 = new Player('player2',document.getElementById('player2'),document.getElementById('player1'));
+        playerList.player1 = player1;
+        playerList.player2 = player2;
+
+        $('.player1-blood-area .blood-num').text(player1.bloodNum);
+        $('.player2-blood-area .blood-num').text(player2.bloodNum);
     };
 
     var onKeyDown = function(event){
@@ -253,13 +286,19 @@ var mainFun = function(){
         $(this).css({left:currentLeft});
     };
 
+    var gameOver = function(){
+        //移除所有子弹
+    };
+
     return {
+        playerList : playerList,
         init : init,
         onKeyDown : onKeyDown,
         animationEndCallBack : animationEndCallBack,
+        gameOver : gameOver
     };
 }();
 
 $(function(){
-    mainFun.init();
+    gameEngine.init();
 });
