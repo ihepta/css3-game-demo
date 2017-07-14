@@ -145,8 +145,16 @@ Player.prototype = {
         this.$bloodBarEl.parent().siblings('.blood-num').text(this.remainBloodNum);
         //血量条移动
         var bloodBarElWidth = this.$bloodBarEl.width();
-        var offset = (this.bloodNum-this.remainBloodNum)/this.bloodNum*bloodBarElWidth;
+        var percent = (this.bloodNum-this.remainBloodNum)/this.bloodNum;
+        var offset = percent*bloodBarElWidth;
         this.$bloodBarEl.css(this.name == 'player1' ? {left:'-'+offset+'px'} : {right:'-'+offset+'px'});
+        //血条颜色改变、闪动
+        if(percent >= 0.75){
+            this.$bloodBarEl.addClass('blink');
+        }else if(percent >= 0.5){
+            this.$bloodBarEl.parents('.blood-area').addClass('blood-turn-red');
+        }
+        this.$bloodBarEl
         if(this.remainBloodNum == 0){
             //游戏结束
             gameEngine.gameOver();
@@ -240,6 +248,8 @@ var gameEngine = function(){
         playerList.player1 = player1;
         playerList.player2 = player2;
 
+        $('#player2').css({left:$('#player2').offset().left+'px'});//方便后期操作全部通过left来控制
+
         $('.player1-blood-area .blood-num').text(player1.bloodNum);
         $('.player2-blood-area .blood-num').text(player2.bloodNum);
     };
@@ -286,6 +296,32 @@ var gameEngine = function(){
 
     var gameOver = function(){
         //移除所有子弹
+        this.removeAllBullets();
+        //移除所有事件
+        this.removeAllEvent();
+        //修改人物表情
+        var suffix = Math.random() < 0.5 ? '1' : '2';
+        if(player1.remainBloodNum <= 0){
+            player1.$el.attr('src','../images/loser'+suffix+'.gif');
+            player2.$el.attr('src','../images/winner'+suffix+'.gif');
+        }else{
+            player1.$el.attr('src','../images/winner'+suffix+'.gif');
+            player2.$el.attr('src','../images/loser'+suffix+'.gif');
+        }
+        //显示K.O
+        $('.ko-area').addClass('ko-show');
+    };
+
+    var removeAllBullets = function(){
+        //移除定时器
+        clearInterval(GameConfig.player1.bulletClock);
+        clearInterval(GameConfig.player2.bulletClock);
+        //移除所有子弹
+        $('.bullet').remove();
+    };
+
+    var removeAllEvent = function(){
+        $('body').unbind();
     };
 
     return {
@@ -293,7 +329,9 @@ var gameEngine = function(){
         init : init,
         onKeyDown : onKeyDown,
         animationEndCallBack : animationEndCallBack,
-        gameOver : gameOver
+        gameOver : gameOver,
+        removeAllBullets : removeAllBullets,
+        removeAllEvent : removeAllEvent
     };
 }();
 

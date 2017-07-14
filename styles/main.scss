@@ -38,6 +38,17 @@ $duringTime:1s;
         background-color: springgreen;
         transition: left 1s,right 1s;
       }
+      .blink{
+        animation:blink 0.5s infinite;
+      }
+    }
+  }
+  .blood-turn-red{
+    border: 1px solid darkred;
+    .blood-bar-div{
+      .blood-bar{
+        background-color: orange;
+      }
     }
   }
   .player1-blood-area{
@@ -130,6 +141,43 @@ $duringTime:1s;
 .player-2-bullet-left{
   background: url("../images/player2-bullet-left.png");
 }
+.ko-area{
+  display: none;
+  position: fixed;
+  width: 375px;
+  height: 198px;
+  top:100px;
+  left:50%;
+  margin-left: -187px;
+  span{
+    display: inline-block;
+    position: absolute;
+    height: 198px;
+  }
+  .ko-word{
+    left: 0;
+    width: 317px;
+    background: url("../images/ko.png") no-repeat center;
+  }
+  .symbol-word{
+    right: 0;
+    width: 50px;
+    background: url("../images/symbol.png") no-repeat center;
+  }
+}
+.ko-show{
+  display: block;
+  .ko-word{
+    animation: bounce-in 1s;
+    animation-fill-mode : both;
+  }
+  .symbol-word{
+    opacity: 0;
+    transform-origin: center 160px;
+    animation: shake-down 3.5s 1.5s;
+    animation-fill-mode : both;
+  }
+}
 @keyframes jump {
   0% {bottom:$groundHeight;}
   50% {
@@ -142,6 +190,28 @@ $duringTime:1s;
   }
 }
 @keyframes blink {
-  
+  0% {background-color: red;}
+  50% {background-color: white;}
+  100% {background-color: red;}
+}
+@keyframes shake-down {
+  0% {bottom:198px;right:0;opacity: 0;}
+  1% {opacity: 1;}
+  5% {bottom:0;right:0;display: inline-block;}
+  8% {bottom:30px;right:-10px;}
+  10% {bottom:0;right:-20px;}
+  12% {bottom:10px;right:-25px;}
+  13% {bottom:0;right: -30px;transform: rotate(0deg);}
+  35% {transform: rotate(-30deg);}
+  65% {transform: rotate(25deg);}
+  97% {transform: rotate(-10deg);}
+  100% {bottom:0;right: -30px;transform: rotate(90deg);opacity: 1;}
+}
+@keyframes bounce-in {
+  0% {transform: scale(3,3);}
+  80% {transform: scale(1,1);}
+  90% {transform: scale(1.5,1.5);}
+  95% {transform: scale(0.8,0.8);}
+  100% {transform: scale(1,1);}
 }
 
