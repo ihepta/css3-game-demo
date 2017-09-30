@@ -282,8 +282,8 @@ var gameEngine = function(){
         }else if(event.keyCode == 32){
             //空格
             player1.shot();
-        }else if(event.keyCode == 17){
-            //ctrl
+        }else if(event.keyCode == 191){
+            // /?
             player2.shot();
         }
     };

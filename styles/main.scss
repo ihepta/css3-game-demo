@@ -9,6 +9,57 @@ $duringTime:1s;
   position: relative;
   background: url('../images/bg.jpg') no-repeat center;
   background-size: 100% 100%;
+  .config-wrapper{
+    box-sizing: border-box;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,0.8);
+    .config-area{
+      position: relative;
+      padding: 10px;
+      top: 10%;
+      width: 60%;
+      height: 80%;
+      margin: 0 auto;
+      background: darkslategray;
+      border: 2px solid green;
+      border-radius: 10px;
+      .p1-config{
+        float: left;
+        width: 49%;
+        height: 80%;
+      }
+      .p2-config{
+        float: right;
+        width: 49%;
+        height: 80%;
+      }
+      .split-line{
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        margin-left: -2px;
+        border-left: 4px solid #ededed;
+        height: 70%;
+      }
+      .start-btn{
+        display: inline-block;
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        margin-left: -50px;
+        width: 100px;
+        height: 45px;
+        border: 2px solid green;
+        border-radius: 5px;
+        background: #ededed url("../images/start-game-icon.png") no-repeat center;
+        &:hover{
+          background: green url("../images/start-game-hover-icon.png") no-repeat center;
+        }
+      }
+    }
+  }
   .blood-area{
     position: relative;
     width: 40%;
