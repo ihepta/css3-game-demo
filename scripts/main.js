@@ -1,6 +1,7 @@
 /**
  * 游戏配置
- * @type {{player1: {jumpMoveOffset: number, maxBulletsNum: number, bulletClock: null}, player2: {jumpMoveOffset: number, maxBulletsNum: number, bulletClock: null}}}
+ * @type {{player1: {jumpMoveOffset: number, maxBulletsNum: number, bulletClock: null},
+ * player2: {jumpMoveOffset: number, maxBulletsNum: number, bulletClock: null}}}
  */
 var GameConfig = {
     player1:{
