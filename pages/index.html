@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gaming</title>
+    <link href="../styles/jquery-ui.css" rel="stylesheet">
     <link href="../styles/main.css" rel="stylesheet"/>
 </head>
 <body>
@@ -68,12 +69,14 @@
         <img src="../images/p2.gif" class="player player-2" id="player2"/>
 
         <!--config box-->
-        <div class="config-wrapper" style="display: none;">
+        <div class="config-wrapper" style="display: block;">
             <div class="config-area">
-                <div class="p-config"></div>
+                <div class="p-config p1-config">
+                    <div class="slider"></div>
+                </div>
                 <div class="split-line"></div>
-                <div class="p-config"></div>
-                <a href="javascript:void(0);" class="start-btn"></a>
+                <div class="p-config p2-config"></div>
+                <a href="javascript:void(0);" class="start-btn" id="startGame"></a>
             </div>
         </div>
     </div>
@@ -84,5 +87,6 @@
     </div>
 </body>
 <script src="../scripts/jquery/jquery.min.1.9.1.js"></script>
+<script src="../scripts/jquery/jquery-ui.js"></script>
 <script src="../scripts/main.js"></script>
 </html>

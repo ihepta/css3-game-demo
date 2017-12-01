@@ -237,6 +237,11 @@ var gameEngine = function(){
     var playerList = {};
 
     var init = function(){
+        $('.slider').slider({min: 20, max: 65});
+        $('#startGame').on('click',start);
+    };
+
+    var start = function(){
         //初始化角色
         initPlayers();
         //keydown事件
@@ -337,5 +342,6 @@ var gameEngine = function(){
 }();
 
 $(function(){
+
     gameEngine.init();
 });

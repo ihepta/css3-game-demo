@@ -26,15 +26,16 @@ $duringTime:1s;
       background: darkslategray;
       border: 2px solid green;
       border-radius: 10px;
-      .p1-config{
-        float: left;
+      .p-config{
         width: 49%;
         height: 80%;
+        border: 1px solid #fff;
+      }
+      .p1-config{
+        float: left;
       }
       .p2-config{
         float: right;
-        width: 49%;
-        height: 80%;
       }
       .split-line{
         position: absolute;

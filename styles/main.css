@@ -16,6 +16,7 @@ html, body {
   background: url("../images/bg.jpg") no-repeat center;
   background-size: 100% 100%; }
   .bg .config-wrapper {
+    display: none;
     box-sizing: border-box;
     position: fixed;
     height: 100%;
@@ -31,14 +32,14 @@ html, body {
       background: darkslategray;
       border: 2px solid green;
       border-radius: 10px; }
+      .bg .config-wrapper .config-area .p-config {
+        width: 49%;
+        height: 80%;
+        border: 1px solid #fff; }
       .bg .config-wrapper .config-area .p1-config {
-        float: left;
-        width: 49%;
-        height: 80%; }
+        float: left; }
       .bg .config-wrapper .config-area .p2-config {
-        float: right;
-        width: 49%;
-        height: 80%; }
+        float: right; }
       .bg .config-wrapper .config-area .split-line {
         position: absolute;
         top: 5%;
