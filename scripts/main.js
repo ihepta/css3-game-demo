@@ -237,7 +237,27 @@ var gameEngine = function(){
     var playerList = {};
 
     var init = function(){
-        $('.slider').slider({min: 20, max: 65});
+        $('.life-slider').slider({min:50, max:500, value:100}).slider('pips', {
+            first: 'label',
+            last: 'label',
+            rest: false
+        }).slider("float");
+        $('.sport-slider').slider({min:50, max:300, value:150}).slider('pips', {
+            first: 'label',
+            last: 'label',
+            rest: false
+        }).slider("float");
+        $('.max-bullet-slider').slider({min:2, max:5, value:3}).slider('pips', {
+            first: 'label',
+            last: 'label',
+            rest: false
+        }).slider("float");
+        $('.harm-slider').slider({min:5, max:30, value:10}).slider('pips', {
+            first: 'label',
+            last: 'label',
+            rest: false
+        }).slider("float");
+        // 开始游戏
         $('#startGame').on('click',start);
     };
 
@@ -249,6 +269,17 @@ var gameEngine = function(){
     };
 
     var initPlayers = function(){
+        // player自定义配置生效
+        GameConfig.player1.bloodNum = $('.p1-config .life-slider').slider( "option", "value" );
+        GameConfig.player1.jumpMoveOffset = $('.p1-config .sport-slider').slider( "option", "value" );
+        GameConfig.player1.maxBulletsNum = $('.p1-config .max-bullet-slider').slider( "option", "value" );
+        GameConfig.player1.bulletPower = $('.p1-config .harm-slider').slider( "option", "value" );
+
+        GameConfig.player2.bloodNum = $('.p2-config .life-slider').slider( "option", "value" );
+        GameConfig.player2.jumpMoveOffset = $('.p2-config .sport-slider').slider( "option", "value" );
+        GameConfig.player2.maxBulletsNum = $('.p2-config .max-bullet-slider').slider( "option", "value" );
+        GameConfig.player2.bulletPower = $('.p2-config .harm-slider').slider( "option", "value" );
+
         player1 = new Player('player1',document.getElementById('player1'),document.getElementById('player2'));
         player2 = new Player('player2',document.getElementById('player2'),document.getElementById('player1'));
         playerList.player1 = player1;
@@ -258,6 +289,8 @@ var gameEngine = function(){
 
         $('.player1-blood-area .blood-num').text(player1.bloodNum);
         $('.player2-blood-area .blood-num').text(player2.bloodNum);
+
+        $('.config-wrapper').hide();
     };
 
     var onKeyDown = function(event){
